@@ -1,6 +1,7 @@
 package blackjack;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CardDeck {
@@ -19,7 +20,7 @@ public class CardDeck {
      * @return
      */
     private List<Card> generateCards() {
-        cards = new ArrayList<>();
+        cards = new LinkedList<>(); //  삭제 메서드 기능(속도) 개선
 
         for (String pattern : PATTERNS) {
             for (int i = 1; i <= CARD_COUNT; i++) {
@@ -56,14 +57,19 @@ public class CardDeck {
     }
 
 
-    /**
-     * 남아 있는 카드 중 랜덤한 1개의 카드를 준다.
-     *
-     * @return
-     */
-//    public Card draw() {
-//
-//    }
+    public Card draw() {
+        Card selectedCard = getRandomCard();
+        cards.remove(selectedCard);
+
+        return selectedCard;
+    }
+
+    private Card getRandomCard(){
+        int size = cards.size();
+        int select = (int)(Math.random() * size);
+
+        return cards.get(select);
+    }
 
     /* 카드와 카드 덱이 잘만들어졌는지 확인 */
     public String toString(){
