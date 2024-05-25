@@ -10,30 +10,46 @@ public class CardDeck {
     private List<Card> cards;
 
     public CardDeck() {
+        cards = this.generateCards();
+    }
+
+
+    /**
+     * 개선 2. 생성자는 실행을 시킬 역할이 만 하면 되고, 비즈니스 로직을 알필요 없다.
+     * @return
+     */
+    private List<Card> generateCards() {
         cards = new ArrayList<>();
 
-        for(String pattern : PATTERNS){
-            for(int i=1; i<=CARD_COUNT; i++) {
+        for (String pattern : PATTERNS) {
+            for (int i = 1; i <= CARD_COUNT; i++) {
                 Card card = new Card();
-                String denomination;
-
-                if(i == 1){
-                    denomination = "A";
-                }else if(i == 11){
-                    denomination = "J";
-                }else if(i == 12){
-                    denomination = "Q";
-                }else if(i == 13){
-                    denomination = "K";
-                }else {
-                    denomination = String.valueOf(i);
-                }
-
+                String denomination = this.numberToDenomination(i);
                 card.setDenomination(denomination);
                 card.setPattern(pattern);
-                cards.add(card);
+                cards.add(card); // 무늬랑 숫자를 Deck 에 삽입.
             }
         }
+
+        return cards;
+    }
+
+    /**
+     * 개선 1. 카드에 표식을 새기는 역할은
+     * 생성자가 할 일이 아니다.
+     * @return Card denomination
+     */
+    private String numberToDenomination(int number) {
+        if (number == 1) {
+            return "A";
+        } else if (number == 11) {
+            return  "J";
+        } else if (number == 12) {
+            return "Q";
+        } else if (number == 13) {
+            return "K";
+        }
+        return String.valueOf(number);
     }
 
     public Card getCard() {
@@ -45,5 +61,7 @@ public class CardDeck {
      *
      * @return
      */
-    public Card draw() {}
+    public Card draw() {
+
+    }
 }
