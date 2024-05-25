@@ -23,10 +23,9 @@ public class CardDeck {
 
         for (String pattern : PATTERNS) {
             for (int i = 1; i <= CARD_COUNT; i++) {
-                Card card = new Card();
                 String denomination = this.numberToDenomination(i);
-                card.setDenomination(denomination);
-                card.setPattern(pattern);
+                Card card = new Card(denomination, pattern);
+
                 cards.add(card); // 무늬랑 숫자를 Deck 에 삽입.
             }
         }
@@ -56,12 +55,23 @@ public class CardDeck {
         return null;
     }
 
+
     /**
      * 남아 있는 카드 중 랜덤한 1개의 카드를 준다.
      *
      * @return
      */
-    public Card draw() {
+//    public Card draw() {
+//
+//    }
 
+    /* 카드와 카드 덱이 잘만들어졌는지 확인 */
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        for (Card card : cards) {
+            sb.append(card.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }
